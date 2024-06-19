@@ -1,0 +1,80 @@
+package com.projectBackend.project.utils.security;
+
+import com.projectBackend.project.utils.jwt.TokenProvider;
+import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+@RequiredArgsConstructor
+@Configuration
+@EnableWebSecurity
+@Component
+public class WebSecurityConfig implements WebMvcConfigurer {
+    private final TokenProvider tokenProvider;
+    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint; // 인증 실패 시 처리할 클래스
+    private final JwtAccessDeniedHandler jwtAccessDeniedHandler; // 인가 실패 시 처리할 클래스
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(); // BCrypt 암호화 객체를 Bean으로 등록
+    }
+
+    @Bean // SecurityFilterChain 객체를 Bean으로 등록
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+
+                .httpBasic()
+                .and()
+                .csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .exceptionHandling()
+                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                .accessDeniedHandler(jwtAccessDeniedHandler)
+                .and()
+                .authorizeRequests()
+//                .antMatchers("/**").permitAll()
+                .antMatchers("/favicon.ico","/manifest.json").permitAll()
+                .antMatchers( "/", "/static/**").permitAll()
+                .antMatchers("/sms/**", "/api/**", "/ws/**", "/chat/**","/success/**").permitAll()
+                .antMatchers("/member/**").permitAll()
+                .antMatchers("/wss/**").permitAll()
+                .antMatchers("/kakao/**").permitAll()
+                .antMatchers("/kakaoToken/**").permitAll()
+                .antMatchers("/main/**").permitAll()
+                .antMatchers("/buyAndSell/getInfo").permitAll()
+                .antMatchers("/community/list").permitAll()
+                .antMatchers("/community/search").permitAll()
+                .antMatchers("/mypage/getData").permitAll()
+                .antMatchers("/news/**").permitAll()
+                .antMatchers("/stock/**").permitAll()
+                .antMatchers("/common/**").permitAll()
+                .antMatchers("/admin/**").permitAll()
+                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                .antMatchers("/v2/api-docs", "/swagger-resources/**", "/swagger-ui.html", "/webjars/**", "/swagger/**", "/sign-api/exception").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .apply(new JwtSecurityConfig(tokenProvider))
+                .and()
+                .cors(); // .and().cors() 추가 된 부분
+
+        return http.build();
+    }
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("*")
+                .allowedMethods("*")
+                .allowedHeaders("*")
+                .allowCredentials(false);
+    }
+}
