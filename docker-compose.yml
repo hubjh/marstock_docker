@@ -1,0 +1,75 @@
+version: '3'
+services:
+  spring-boot:
+    build:
+      context: ./spring-boot
+    container_name: marstock-spring-boot
+    ports:
+      - "8111:8111"
+    volumes:
+      - ./source/PROJECT_FINAL_BACKEND:/app
+    command: tail -f /dev/null
+
+  flask:
+    build:
+      context: ./flask
+    container_name: marstock-flask
+    ports:
+      - "5000:5000"
+    environment:
+      FLASK_APP: app.py
+      FLASK_RUN_HOST: 0.0.0.0
+      FLASK_RUN_PORT: 5000
+    volumes:
+      - ./source/PROJECT_FINAL_PYTHON:/app
+      - ./flask/data:/data
+      - ./flask/hashes:/hashes
+      - ./flask/logs:/logs
+    command: gunicorn --bind 0.0.0.0:5000 app:app  # 변경된 부분
+    # command: flask run
+    # command: tail -f /dev/null
+
+  mysql:
+    # image: mysql:8.0.36
+    build:
+      context: ./mysql
+    container_name: marstock-mysql
+    ports:
+      - 3306:3306                     # HOST:CONTAINER
+    environment:
+      MYSQL_USER: marstock            # 일반 사용자 계정
+      MYSQL_PASSWORD: 1234            # 일반 사용자 비밀번호
+      MYSQL_DATABASE: marstock        # 생성할 데이터베이스 이름
+      MYSQL_ROOT_PASSWORD: admin      # root 계정 비밀번호
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - ./mysql/volumes:/var/lib/mysql
+      
+  elasticsearch:
+    # image: docker.elastic.co/elasticsearch/elasticsearch:7.17.18
+    build:
+        context: ./elasticsearch
+    container_name: marstock-elasticsearch
+    ports:
+      - 9200:9200
+    environment:
+      - discovery.type=single-node
+    volumes:
+      - ./elasticsearch/data:/usr/share/elasticsearch/data
+
+  kibana:
+    # image: docker.elastic.co/kibana/kibana:7.17.18
+    build:
+      context: ./kibana
+    container_name: marstock-kibana
+    ports:
+      - 5601:5601
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    volumes:
+      - ./kibana/data:/usr/share/kibana/data
+    depends_on:
+      - elasticsearch
+    

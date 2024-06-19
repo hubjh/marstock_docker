@@ -1,0 +1,20 @@
+2024-03-09 18:20:44,632 - INFO - "/data/2024/02/stock.csv" 파일이 성공적으로 저장되었습니다.
+2024-03-09 18:21:28,971 - INFO - "/data/2024/03/stock.csv" 파일이 성공적으로 저장되었습니다.
+2024-03-09 18:22:43,403 - INFO - "/data/2024/03/stock.csv" 파일이 성공적으로 저장되었습니다.
+2024-03-09 18:23:49,635 - INFO - "/data/2024/03/stock.csv" 파일이 성공적으로 저장되었습니다.
+2024-03-09 18:24:47,097 - INFO - "/data/2024/03/stock.csv" 파일이 성공적으로 저장되었습니다.
+2024-03-09 18:25:45,568 - INFO - "/data/2024/03/stock.csv" 파일이 성공적으로 저장되었습니다.
+2024-03-09 18:26:43,724 - INFO - "/data/2024/03/stock.csv" 파일이 성공적으로 저장되었습니다.
+2024-03-09 18:27:43,733 - INFO - "/data/2024/03/stock.csv" 파일이 성공적으로 저장되었습니다.
+2024-03-09 18:28:43,328 - INFO - "/data/2024/03/stock.csv" 파일이 성공적으로 저장되었습니다.
+2024-03-09 18:29:43,134 - INFO - "/data/2024/03/stock.csv" 파일이 성공적으로 저장되었습니다.
+2024-03-09 18:30:42,011 - INFO - "/data/2024/03/stock.csv" 파일이 성공적으로 저장되었습니다.
+2024-03-09 18:31:45,065 - INFO - "/data/2024/03/stock.csv" 파일이 성공적으로 저장되었습니다.
+2024-03-09 18:32:44,986 - INFO - "/data/2024/03/stock.csv" 파일이 성공적으로 저장되었습니다.
+2024-03-09 18:33:42,441 - INFO - "/data/2024/03/stock.csv" 파일이 성공적으로 저장되었습니다.
+2024-03-09 18:34:39,514 - INFO - "/data/2024/03/stock.csv" 파일이 성공적으로 저장되었습니다.
+2024-03-09 18:35:29,936 - INFO - "/data/2024/03/stock.csv" 파일이 성공적으로 저장되었습니다.
+2024-03-09 18:36:30,036 - INFO - "/data/2024/03/stock.csv" 파일이 성공적으로 저장되었습니다.
+2024-03-09 18:37:30,651 - INFO - "/data/2024/03/stock.csv" 파일이 성공적으로 저장되었습니다.
+2024-03-09 18:38:33,785 - ERROR - create_stock_files 함수에서 오류 발생: HTTPConnectionPool(host='data.krx.co.kr', port=80): Max retries exceeded with url: /comm/bldAttendant/getJsonData.cmd (Caused by NameResolutionError("<urllib3.connection.HTTPConnection object at 0xffff85fee1a0>: Failed to resolve 'data.krx.co.kr' ([Errno -3] Temporary failure in name resolution)"))
+2024-03-09 22:52:28,888 - ERROR - create_stock_files 함수에서 오류 발생: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))

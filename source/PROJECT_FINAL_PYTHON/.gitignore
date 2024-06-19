@@ -1,0 +1,20 @@
+# data 디렉토리와 하위 모든 파일/폴더 추적 안 함
+data/
+
+# news data
+news_data/
+
+# logs 디렉토리와 하위 모든 파일/폴더 추적 안 함
+logs/
+
+# hashes 디렉토리와 하위 모든 파일/폴더 추적 안 함
+hashes/
+
+# test 는 개인용
+route/learning/test.py
+
+# etc
+__pycache__/
+.DS_Store
+#.idea/
+

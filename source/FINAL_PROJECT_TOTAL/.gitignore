@@ -1,0 +1,57 @@
+# STS (Spring Tool Suite)
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+# IntelliJ IDEA
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# VS Code
+.vscode/
+
+# 프로젝트 파일
+application.properties
+
+# 의존성 및 빌드 관련
+src/main/react/node_modules
+src/main/node_modules
+src/main/react/.pnp
+src/main/react/pnp.js
+src/main/react/.env
+src/main/react/coverage
+src/main/react/build
+
+# 기타
+src/main/react/.DS_Store
+src/main/react/.env.local
+src/main/react/.env.development.local
+src/main/react/.env.test.local
+src/main/react/.env.production.local
+src/main/react/npm-debug.log*
+src/main/react/yarn-debug.log*
+src/main/react/yarn-error.log*
+
+# 리소스
+src/main/resources/static/static
+
+build/libs/project-0.0.1-SNAPSHOT.jar
