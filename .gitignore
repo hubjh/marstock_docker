@@ -33,3 +33,5 @@ Desktop.ini
 !Dockerfile
 !docker-compose.yml
 
+# es data 무시
+# elasticsearch/data/
